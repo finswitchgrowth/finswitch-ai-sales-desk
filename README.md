@@ -17,3 +17,6 @@ Fresh-stack foundation for FIN.SWITCH WhatsApp lead capture, qualification, CRM 
 
 ## Environment
 Copy `.env.example` to Vercel Environment Variables. Never commit secrets.
+
+## Deployment verification
+Fresh deployment trigger: 2026-09-21. Verify the latest `main` commit is used by the connected Vercel project.
