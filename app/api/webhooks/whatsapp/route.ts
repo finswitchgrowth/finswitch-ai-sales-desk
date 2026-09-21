@@ -1,6 +1,11 @@
 import { NextRequest } from 'next/server';
 
-const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || 'FinSwitch_WA_Verify_2026_SalesAI';
+// Keep the Meta webhook verification value deterministic for the current app setup.
+// This avoids a stale/mismatched Vercel environment variable preventing verification.
+const VERIFY_TOKEN = 'FinSwitch_WA_Verify_2026_SalesAI';
+
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
@@ -11,7 +16,10 @@ export async function GET(req: NextRequest) {
   if (mode === 'subscribe' && token === VERIFY_TOKEN && challenge) {
     return new Response(challenge, {
       status: 200,
-      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-store',
+      },
     });
   }
 
